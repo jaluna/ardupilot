@@ -49,7 +49,11 @@ extern const AP_HAL::HAL& hal;
 // Convenience macros //////////////////////////////////////////////////////////
 //
 #define DIGIT_TO_VAL(_x)        (_x - '0')
+<<<<<<< HEAD
 #define hexdigit(x) ((x)>9?'A'+(x):'0'+(x))
+=======
+#define hexdigit(x) ((x)>9?'A'+((x)-10):'0'+(x))
+>>>>>>> cc92a5269c24c52de2b67f5acbf3eacf26470ce3
 
 AP_GPS_NORTH::AP_GPS_NORTH(AP_GPS &_gps, AP_GPS::GPS_State &_state, AP_HAL::UARTDriver *_port) :
     AP_GPS_Backend(_gps, _state, _port),
@@ -262,11 +266,19 @@ bool AP_GPS_NORTH::_term_complete()
                     make_gps_time(_new_date, _new_time * 10);
                     state.last_gps_time_ms = now;
                     if ((_gps_status != 4) && (_gps_status != 5)) {
+<<<<<<< HEAD
 											state.status        = AP_GPS::GPS_OK_FIX_3D;
 								  	} else {
 										// 4 means RTK_FIX and 5 means RTK_FLOAT but it anyway better than plain 3D Fix
 											state.status        = AP_GPS::GPS_OK_FIX_3D_RTK;
 								  	}
+=======
+										state.status        = AP_GPS::GPS_OK_FIX_3D;
+								  } else {
+										// 4 means RTK_FIX and 5 means RTK_FLOAT but it anyway better than plain 3D Fix
+										state.status        = AP_GPS::GPS_OK_FIX_3D_RTK;
+								  }
+>>>>>>> cc92a5269c24c52de2b67f5acbf3eacf26470ce3
                     fill_3d_velocity();
                     break;
                 case _GPS_SENTENCE_GGA:
@@ -277,11 +289,19 @@ bool AP_GPS_NORTH::_term_complete()
                     state.num_sats      = _new_satellite_count;
                     state.hdop          = _new_hdop;
                     if ((_gps_status != 4) && (_gps_status != 5)) {
+<<<<<<< HEAD
 											state.status        = AP_GPS::GPS_OK_FIX_3D;
 										} else {
 										// 4 means RTK_FIX and 5 means RTK_FLOAT but it anyway better than plain 3D Fix
 											state.status        = AP_GPS::GPS_OK_FIX_3D_RTK;
 										}
+=======
+					    	 	  		state.status        = AP_GPS::GPS_OK_FIX_3D;
+									} else {
+										// 4 means RTK_FIX and 5 means RTK_FLOAT but it anyway better than plain 3D Fix
+										state.status        = AP_GPS::GPS_OK_FIX_3D_RTK;
+									}
+>>>>>>> cc92a5269c24c52de2b67f5acbf3eacf26470ce3
                     break;
                 case _GPS_SENTENCE_VTG:
                     _last_VTG_ms = now;
@@ -346,7 +366,11 @@ bool AP_GPS_NORTH::_term_complete()
             break;
         case _GPS_SENTENCE_GGA + 6: // Fix data (GGA)
             _gps_data_good = _term[0] > '0';
+<<<<<<< HEAD
 					  _gps_status = _term[0]-'0';
+=======
+					 _gps_status = _term[0]-'0';
+>>>>>>> cc92a5269c24c52de2b67f5acbf3eacf26470ce3
             break;
         case _GPS_SENTENCE_VTG + 9: // validity (VTG) (we may not see this field)
             _gps_data_good = _term[0] != 'N';
@@ -438,6 +462,10 @@ AP_GPS_NORTH::_detect(struct NORTH_detect_state &state, uint8_t data)
 		break;
 	case 3:
 		if (hexdigit(state.ck&0xF) == data) {
+<<<<<<< HEAD
+=======
+            state.step = 0;
+>>>>>>> cc92a5269c24c52de2b67f5acbf3eacf26470ce3
 			return true;
 		}
 		state.step = 0;

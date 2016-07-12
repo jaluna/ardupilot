@@ -315,17 +315,24 @@ AP_GPS::detect_instance(uint8_t instance)
             _broadcast_gps_type("ERB", instance, dstate->last_baud);
             new_gps = new AP_GPS_ERB(*this, state[instance], _port[instance]);
         }
+<<<<<<< HEAD
         // user has to explicitly set the MAV type, do not use AUTO
         // Do not try to detect the MAV type, assume its there
         else if (_type[instance] == GPS_TYPE_MAV) {
             _broadcast_gps_type("MAV", instance, dstate->last_baud);
             new_gps = new AP_GPS_MAV(*this, state[instance], NULL);
         }
+=======
+>>>>>>> cc92a5269c24c52de2b67f5acbf3eacf26470ce3
 		else if ((_type[instance] == GPS_TYPE_AUTO || _type[instance] == GPS_TYPE_NORTH) &&
                  AP_GPS_NORTH::_detect(dstate->north_detect_state, data)) {
 			_broadcast_gps_type("NORTH", instance, dstate->last_baud);
 			new_gps = new AP_GPS_NORTH(*this, state[instance], _port[instance]);
+<<<<<<< HEAD
 		}        
+=======
+		}
+>>>>>>> cc92a5269c24c52de2b67f5acbf3eacf26470ce3
 		else if (now - dstate->detect_started_ms > (ARRAY_SIZE(_baudrates) * GPS_BAUD_TIME_MS)) {
 			// prevent false detection of NMEA mode in
 			// a MTK or UBLOX which has booted in NMEA mode
